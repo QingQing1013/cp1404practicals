@@ -11,16 +11,14 @@ def load_projects(filename):
     """Load projects from a tab-delimited file into a list of Project objects."""
     projects = []
     with open(filename, 'r', encoding='utf-8') as in_file:
-        header = next(in_file)  # skip header line
+        header = next(in_file)
         for line in in_file:
             parts = line.strip().split('\t')
-            # Expecting: name, start_date, priority, cost_estimate, completion
             name = parts[0]
             date_str = parts[1]
             priority = int(parts[2])
             cost = float(parts[3])
             completion = int(parts[4])
-            # Parse date
             start_date = datetime.datetime.strptime(date_str, '%d/%m/%Y').date()
             projects.append(Project(name, start_date, priority, cost, completion))
     return projects
